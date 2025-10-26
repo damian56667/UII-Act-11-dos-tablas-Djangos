@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block titulo %}Marcas | Perfumería{% endblock %}
+{% block contenido %}
+<div class="page-header">
+    <h2>Marcas Registradas</h2>
+    <a href="{% url 'app_perfumeria:crear_marca' %}" class="btn btn-primary">+ Agregar Marca</a>
+</div>
+<ul class="item-grid">
+    {% for marca in marcas %}
+    <li class="item-card">
+        <a href="{% url 'app_perfumeria:detalle_marca' marca.id_marca %}">
+            <h3>{{ marca.nombre_marca }}</h3>
+            <p class="item-detail">País: {{ marca.pais_origen }}</p>
+            <p class="item-detail">Exclusiva: {% if marca.es_exclusiva %}Sí{% else %}No{% endif %}</p>
+        </a>
+    </li>
+    {% empty %}
+    <li class="no-items">No hay marcas registradas.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

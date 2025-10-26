@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block titulo %}Eliminar Marca | Perfumería{% endblock %}
+{% block contenido %}
+<h2>¿Estás seguro de que quieres borrar la marca "{{ marca.nombre_marca }}"?</h2>
+<p>Esta acción no se puede deshacer y también eliminará todos los productos asociados a esta marca.</p>
+<form method="post">
+    {% csrf_token %}
+    <div class="actions">
+        <button type="submit" class="btn btn-danger">Sí, Borrar</button>
+        <a href="{% url 'app_perfumeria:detalle_marca' marca.id_marca %}" class="btn">Cancelar</a>
+    </div>
+</form>
+{% endblock %}

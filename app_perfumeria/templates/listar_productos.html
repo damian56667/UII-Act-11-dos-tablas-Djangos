@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block titulo %}Productos | Perfumería{% endblock %}
+{% block contenido %}
+<div class="page-header">
+    <h2>Productos Disponibles</h2>
+    <a href="{% url 'app_perfumeria:crear_producto' %}" class="btn btn-primary">+ Agregar Producto</a>
+</div>
+<ul class="product-grid">
+    {% for producto in productos %}
+    <li class="product-card">
+        <a href="{% url 'app_perfumeria:detalle_producto' producto.id_producto %}">
+            {% if producto.foto %}
+            <img src="{{ producto.foto.url }}" alt="Foto de {{ producto.nombre }}" class="product-img">
+            {% else %}
+            <div class="product-placeholder">🧴</div>
+            {% endif %}
+            <h3>{{ producto.nombre }}</h3>
+            <p class="product-brand">{{ producto.id_marca.nombre_marca }}</p>
+            <p class="product-price">${{ producto.precio_venta }}</p>
+            <p class="product-stock">Stock: {{ producto.stock }}</p>
+        </a>
+    </li>
+    {% empty %}
+    <li class="no-items">No hay productos registrados.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Perfumería{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="main-header">
+            <h1><a href="{% url 'app_perfumeria:listar_productos' %}">🌸 Perfumería</a></h1> {# Enlace principal ahora a productos #}
+            <nav class="main-nav">
+                <a href="{% url 'app_perfumeria:listar_productos' %}">📦 Productos</a> {# Destacado #}
+                <a href="{% url 'app_perfumeria:crear_producto' %}">➕ Nuevo Producto</a> {# Destacado #}
+                <a href="{% url 'app_perfumeria:listar_marcas' %}">🏬 Marcas</a>
+                <a href="{% url 'app_perfumeria:crear_marca' %}">➕ Nueva Marca</a>
+            </nav>
+        </header>
+        <main class="main-content">
+            {% block contenido %}{% endblock %}
+        </main>
+        <footer class="main-footer">
+            <p>© 2025 Perfumería - Aplicación educativa de Django</p>
+        </footer>
+    </div>
+</body>
+</html>

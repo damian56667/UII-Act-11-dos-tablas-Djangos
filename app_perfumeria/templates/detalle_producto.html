@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block titulo %}{{ producto.nombre }} | Perfumería{% endblock %}
+{% block contenido %}
+<article class="item-detail">
+    <div class="item-banner">
+        {% if producto.foto %}
+        <img src="{{ producto.foto.url }}" alt="Foto de {{ producto.nombre }}" class="detail-photo">
+        {% else %}
+        <div class="detail-placeholder">🧴</div>
+        {% endif %}
+        <div class="item-info">
+            <h1>{{ producto.nombre }}</h1>
+            <h3>Marca: <a href="{% url 'app_perfumeria:detalle_marca' producto.id_marca.id_marca %}">{{ producto.id_marca.nombre_marca }}</a></h3>
+            <p>Precio: ${{ producto.precio_venta }}</p>
+            <p>Stock: {{ producto.stock }} unidades</p>
+            {% if producto.id_familia %}<p>Familia Olfativa: {{ producto.id_familia }}</p>{% endif %}
+        </div>
+    </div>
+    <div class="detail-actions">
+        <a href="{% url 'app_perfumeria:editar_producto' producto.id_producto %}" class="btn btn-secondary">✏️ Editar</a>
+        <a href="{% url 'app_perfumeria:borrar_producto' producto.id_producto %}" class="btn btn-danger">🗑️ Borrar</a>
+    </div>
+</article>
+{% endblock %}

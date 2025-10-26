@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block titulo %}{{ marca.nombre_marca }} | Perfumería{% endblock %}
+{% block contenido %}
+<article class="item-detail">
+    <div class="item-info">
+        <h1>{{ marca.nombre_marca }}</h1>
+        <h3>País de Origen: {{ marca.pais_origen }}</h3>
+        {% if marca.contacto_nombre %}<p>Contacto: {{ marca.contacto_nombre }}</p>{% endif %}
+        {% if marca.contacto_email %}<p>Email: {{ marca.contacto_email }}</p>{% endif %}
+        <p>Marca Exclusiva: {% if marca.es_exclusiva %}Sí{% else %}No{% endif %}</p>
+    </div>
+    <div class="detail-actions">
+        <a href="{% url 'app_perfumeria:editar_marca' marca.id_marca %}" class="btn btn-secondary">✏️ Editar</a>
+        <a href="{% url 'app_perfumeria:borrar_marca' marca.id_marca %}" class="btn btn-danger">🗑️ Borrar</a>
+    </div>
+
+    <section class="related-items-section">
+        <h2>Productos de esta Marca</h2>
+        {% if productos_marca %}
+        <ul class="product-list-compact">
+            {% for producto in productos_marca %}
+            <li>
+                <a href="{% url 'app_perfumeria:detalle_producto' producto.id_producto %}">
+                    {{ producto.nombre }} - ${{ producto.precio_venta }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="empty-message">No hay productos registrados para esta marca.</p>
+        {% endif %}
+    </section>
+</article>
+{% endblock %}

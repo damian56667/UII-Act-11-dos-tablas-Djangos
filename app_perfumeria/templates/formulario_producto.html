@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block titulo %}{{ titulo }} | Perfumería{% endblock %}
+{% block contenido %}
+<h2>{{ titulo }}</h2>
+<form method="post" enctype="multipart/form-data" class="form-styled">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="actions">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% url 'app_perfumeria:listar_productos' %}" class="btn">Cancelar</a>
+    </div>
+</form>
+{% endblock %}
